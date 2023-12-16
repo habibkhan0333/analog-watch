@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-color: blue;
+        }
+        .flex{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .clock{
+            width: 50vw;
+            height: 50vh;
+            background-color: white;
+            border-radius: 50%;
+            border: 2px solid red;
+            position: relative;
+            z-index: -2;
+           
+            
+        }
+        .dot{
+            width: 4vw;
+            height: 4vh;
+            background-color: black;
+            border-radius: 50%;
+        }
+        .needleHours{
+            width: 4%;
+            height: 35%;
+            background-color: rgb(0, 0, 0);
+            border-radius: 50%;
+            position: absolute;
+            top:16%;
+            z-index: -1;
+            transform-origin: bottom;
+        }
+        .needleMinutes{
+            width: 3%;
+            height: 40%;
+            background-color: rgb(0, 0, 0);
+            border-radius: 50%;
+            position: absolute;
+            top:10%;
+            z-index: -1;
+            transform-origin: bottom;
+        }
+        .needleSeconds{
+            width: 2%;
+            height: 45%;
+            background-color: rgb(250, 3, 3);
+            border-radius: 50%;
+            position: absolute;
+            top:4%;
+            z-index: -1;
+            transform-origin: bottom;
+        }
+        .milliseconds1{
+            position: absolute;
+            bottom: 20px;
+            color: red; 
+            font-size: 25px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body class="flex">
+    <div class="clock flex">
+        <p class="dot"></p>
+        <p id="hours" class="needleHours"></p>
+        <p id="minutes" class="needleMinutes"></p>
+        <p id="seconds" class="needleSeconds"></p>
+        <p id="milliSeconds" class="milliseconds1"></p>
+    </div>
+    <script>
+    /*
+2. bg-> add -> picture pngwing
+3. responsive
+4. needles ka color & size 
+1. feature milliseconds
+
+
+*/
+ 
+ 
+ 
+ 
+ // date filtering 
+ setInterval(() => {
+    let date = new Date();
+    let numSeconds = date.getSeconds();
+    let numMinutes = date.getMinutes();
+    let numHours = date.getHours();
+    let numMilliSeconds = date.getMilliseconds();
+
+    // formula 
+    // formula for hour is this eather : 36 * numHours
+    let hoursDegree = 30 *  numHours + numMinutes / 2;
+    let minutesDegree = 6 * numMinutes;
+    let secondsDegree = 6 * numSeconds;
+
+
+
+    // html elements targetting and styling 
+   document.getElementById("seconds").style.transform = `rotate(${secondsDegree}deg)`;
+
+
+
+
+    document.getElementById("minutes").style.transform = `rotate(${minutesDegree}deg)`;
+
+
+
+    document.getElementById("hours").style.transform = `rotate(${hoursDegree}deg)`;
+    document.getElementById("milliSeconds").innerHTML=numMilliSeconds;
+
+}, 1);
+    </script>
+</body>
+</html>
